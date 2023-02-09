@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI</title>
+    <link rel="stylesheet" href="./Vditor/index.css" />
+    <link rel="stylesheet" href="./index.css">
+
+</head>
+
+<body>
+    <div class="container-center">
+        <h1 class="title">ChatGPT3</h1>
+        <nav>
+            <a class="link" href="https://github.com/bugfan">Github</a>
+            <a class="link" href="https://www.i996.me">内网穿透</a>
+        </nav>
+        <br>
+        <div class="form">
+            <div class="inputGroup">
+                <div class="hovt formInput">
+                    <label for="token">* token:</label>
+                    <input id="token" placeholder="例如：76557852" type="text" value="" name="token" />
+                </div>
+                <div class="formInput">
+                    <label for="question">* 问题：</label>
+                    <textarea id="question" type="text" name="question" placeholder="输入问题后敲回车,或者点击下面的“发送”按钮"
+                        autofocus></textarea>
+                </div>
+                <div class="buttonGroup">
+                    <button type="button" id="btn2" style="background-color: rgb(194, 183, 28);"
+                        onclick="document.getElementById('question').value = '';">清空</button>
+                    <button type="button" id="btn1" style="background-color: aqua;" onclick="getAnswer()">发送</button>
+                </div>
+            </div>
+            <div class="QRcode">
+                <img src="https://www.i996.me/img/qdmsj.png">
+                <small><span style="margin-right: 3px;">👆</span>扫码获取Token</small>
+            </div>
+        </div>
+        <!-- <hr> -->
+    </div>
+    <div class="answer-region">
+        <center>
+            <div id="load"><img style="width:100px;height:80px;" src="https://www.i996.me/img/load1.png" /></div>
+            <div style="width: 500px;text-align: center;" id="content"></div>
+        </center>
+        <div id="AnswerContainer">
+        </div>
+    </div>
+    <script src="./JQuery/jquery-3.6.3.min.js"></script>
+    <!-- <script src="./Vditor/index.min.js"></script> -->
+    <script src="./Vditor/method.min.js"></script>
+    <script src="./api.js"></script>
+    <script>
+        window.onload = function () {
+            // markdown初始化文字
+            const text = "### 你好.欢迎体验人工智能聊天机器人.";
+            updatePreviewElement(text)
+            // 读取报存的token并设置在输入框上
+            const tokenEle = document.getElementById('token');
+            const question = document.getElementById('question');
+            tokenEle.value = localStorage.getItem('_qdmsj_token')
+            tokenEle.onkeydown = question.onkeydown = function (e) {
+                // 绑定回车事件
+                if ((e || event).keyCode == 13) {
+                    console.log(1);
+                    getAnswer();
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>
